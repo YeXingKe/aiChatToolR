@@ -52,3 +52,5 @@ export default tseslint.config({
   },
 })
 ```
+
+Zustand 的 create 函数是现代 React 应用中管理状态的优秀选择，特别适合中小型应用或希望减少状态管理复杂度的项目
