@@ -4,6 +4,8 @@ import { RoutePath } from "@/utils/constant"
 import clsx from "clsx"
 import { SideBar } from "@/components/SideBar"
 import { Chat } from "../Chat"
+import { useMobileScreen } from "@/utils"
+import { getLang } from "@/locales"
 
 export function WindowContent(props:{children:React.ReactNode}){
     return (
@@ -15,6 +17,10 @@ export function WindowContent(props:{children:React.ReactNode}){
 
 function Screen(){
     const isHome = location.pathname === RoutePath.Home
+    const isMobileScreen = useMobileScreen();
+    const shouldTightBorder =
+    getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
+
     const renderContent = () => {
         return (
             <>
@@ -25,12 +31,12 @@ function Screen(){
             />
             <WindowContent>
                 <Routes>
-                <Route path={RoutePath.Home} element={<Chat />} />
-                {/* <Route path={RoutePath.NewChat} element={<NewChat />} />
-                <Route path={RoutePath.Masks} element={<MaskPage />} />
-                <Route path={RoutePath.Chat} element={<Chat />} />
-                <Route path={RoutePath.Settings} element={<Settings />} /> */}
-                </Routes>
+                    <Route path={RoutePath.Home} element={<Chat />} />
+                    {/* <Route path={RoutePath.NewChat} element={<NewChat />} />
+                    <Route path={RoutePath.Masks} element={<MaskPage />} />
+                    <Route path={RoutePath.Chat} element={<Chat />} />
+                    <Route path={RoutePath.Settings} element={<Settings />} /> */}
+                    </Routes>
             </WindowContent>
             </>
         )
@@ -38,8 +44,7 @@ function Screen(){
     return (
         <div
           className={clsx(styles.container, {
-            // [styles["tight-container"]]: shouldTightBorder,
-            // [styles["rtl-screen"]]: getLang() === "ar",
+            [styles["tight-container"]]: shouldTightBorder,
           })}
         >
           {renderContent()}

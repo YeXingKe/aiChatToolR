@@ -3,15 +3,15 @@ import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
 import styles from "@/pages/Home/index.module.scss";
 
 
-import SettingsIcon from "@/assets/icons/settings.svg";
-import GithubIcon from "@/assets/icons/github.svg";
-import ChatGptIcon from "@/assets/icons/chatgpt.svg";
-import AddIcon from "@/assets/icons/add.svg";
-import DeleteIcon from "@/assets/icons/delete.svg";
-import MaskIcon from "@/assets/icons/mask.svg";
-import McpIcon from "@/assets/icons/mcp.svg";
-import DragIcon from "@/assets/icons/drag.svg";
-import DiscoveryIcon from "@/assets/icons/discovery.svg";
+import SettingsIcon from "@/assets/icons/settings.svg?react";
+import GithubIcon from "@/assets/icons/github.svg?react";
+import ChatGptIcon from "@/assets/icons/chatgpt.svg?react";
+import AddIcon from "@/assets/icons/add.svg?react";
+import DeleteIcon from "@/assets/icons/delete.svg?react";
+import MaskIcon from "@/assets/icons/mask.svg?react";
+import McpIcon from "@/assets/icons/mcp.svg?react";
+import DragIcon from "@/assets/icons/drag.svg?react";
+import DiscoveryIcon from "@/assets/icons/discovery.svg?react";
 
 
 import Locale from "@/locales";
@@ -20,102 +20,10 @@ import { Link, useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { IconButton } from "../IconButton";
 import { isIOS, useMobileScreen } from "@/utils";
-import { DEFAULT_SIDEBAR_WIDTH, MAX_SIDEBAR_WIDTH, MIN_SIDEBAR_WIDTH, NARROW_SIDEBAR_WIDTH, RoutePath } from "@/utils/constant";
 import { useAppConfig } from "@/stores";
+import { RoutePath } from "@/utils/constant";
 
 
-export function useHotKey() {
-//   const chatStore = useChatStore();
-
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-    //   if (e.altKey || e.ctrlKey) {
-    //     if (e.key === "ArrowUp") {
-    //       chatStore.nextSession(-1);
-    //     } else if (e.key === "ArrowDown") {
-    //       chatStore.nextSession(1);
-    //     }
-    //   }
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  });
-}
-
-export function useDragSideBar() {
-  const limit = (x: number) => Math.min(MAX_SIDEBAR_WIDTH, x);
-
-  const config = useAppConfig();
-  const startX = useRef(0);
-  const startDragWidth = useRef(config.sidebarWidth ?? DEFAULT_SIDEBAR_WIDTH);
-  const lastUpdateTime = useRef(Date.now());
-
-  const toggleSideBar = () => {
-    config.update((config) => {
-      if (config.sidebarWidth < MIN_SIDEBAR_WIDTH) {
-        config.sidebarWidth = DEFAULT_SIDEBAR_WIDTH;
-      } else {
-        config.sidebarWidth = NARROW_SIDEBAR_WIDTH;
-      }
-    });
-  };
-
-  const onDragStart = (e: MouseEvent) => {
-    // Remembers the initial width each time the mouse is pressed
-    startX.current = e.clientX;
-    startDragWidth.current = config.sidebarWidth;
-    const dragStartTime = Date.now();
-
-    const handleDragMove = (e: MouseEvent) => {
-      if (Date.now() < lastUpdateTime.current + 20) {
-        return;
-      }
-      lastUpdateTime.current = Date.now();
-      const d = e.clientX - startX.current;
-      const nextWidth = limit(startDragWidth.current + d);
-      config.update((config) => {
-        if (nextWidth < MIN_SIDEBAR_WIDTH) {
-          config.sidebarWidth = NARROW_SIDEBAR_WIDTH;
-        } else {
-          config.sidebarWidth = nextWidth;
-        }
-      });
-    };
-
-    const handleDragEnd = () => {
-      // In useRef the data is non-responsive, so `config.sidebarWidth` can't get the dynamic sidebarWidth
-      window.removeEventListener("pointermove", handleDragMove);
-      window.removeEventListener("pointerup", handleDragEnd);
-
-      // if user click the drag icon, should toggle the sidebar
-      const shouldFireClick = Date.now() - dragStartTime < 300;
-      if (shouldFireClick) {
-        toggleSideBar();
-      }
-    };
-
-    window.addEventListener("pointermove", handleDragMove);
-    window.addEventListener("pointerup", handleDragEnd);
-  };
-
-  const isMobileScreen = useMobileScreen();
-  const shouldNarrow =
-    !isMobileScreen && config.sidebarWidth < MIN_SIDEBAR_WIDTH;
-
-  useEffect(() => {
-    const barWidth = shouldNarrow
-      ? NARROW_SIDEBAR_WIDTH
-      : limit(config.sidebarWidth ?? DEFAULT_SIDEBAR_WIDTH);
-    const sideBarWidth = isMobileScreen ? "100vw" : `${barWidth}px`;
-    document.documentElement.style.setProperty("--sidebar-width", sideBarWidth);
-  }, [config.sidebarWidth, isMobileScreen, shouldNarrow]);
-
-  return {
-    onDragStart,
-    shouldNarrow,
-  };
-}
 
 /**
  * 边栏容器
@@ -124,8 +32,8 @@ export function useDragSideBar() {
  */
 export function SideBarContainer(props: {
   children: React.ReactNode;
-  onDragStart: (e: MouseEvent) => void;
-  shouldNarrow: boolean;
+  onDragStart?: (e: MouseEvent) => void;
+  shouldNarrow?: boolean;
   className?: string;
 }) {
   const isMobileScreen = useMobileScreen();
@@ -212,8 +120,8 @@ export function SideBarTail(props: {
 }
 
 export function SideBar(props: { className?: string }) {
-  useHotKey();
-  const { onDragStart, shouldNarrow } = useDragSideBar();
+  // useHotKey();
+  // const { onDragStart, shouldNarrow } = useDragSideBar();
   const navigate = useNavigate();
   const config = useAppConfig();
 //   useEffect(() => {
@@ -228,20 +136,17 @@ export function SideBar(props: { className?: string }) {
 
   return (
     <SideBarContainer
-      onDragStart={onDragStart}
-      shouldNarrow={shouldNarrow}
       {...props}
     >
       <SideBarHeader
         title="NextChat"
         subTitle="Build your own AI assistant."
         logo={<ChatGptIcon />}
-        shouldNarrow={shouldNarrow}
       >
         <div className={styles["sidebar-header-bar"]}>
           <IconButton
             icon={<MaskIcon />}
-            text={shouldNarrow ? undefined : Locale.Mask.Name}
+            text={Locale.Mask.Name}
             className={styles["sidebar-bar-button"]}
             onClick={() => {
               if (config.dontShowMaskSplashScreen !== true) {
@@ -252,41 +157,7 @@ export function SideBar(props: { className?: string }) {
             }}
             shadow
           />
-          {/* {mcpEnabled && (
-            <IconButton
-              icon={<McpIcon />}
-              text={shouldNarrow ? undefined : Locale.Mcp.Name}
-              className={styles["sidebar-bar-button"]}
-              onClick={() => {
-                navigate(Path.McpMarket, { state: { fromHome: true } });
-              }}
-              shadow
-            />
-          )} */}
-          {/* <IconButton
-            icon={<DiscoveryIcon />}
-            text={shouldNarrow ? undefined : Locale.Discovery.Name}
-            className={styles["sidebar-bar-button"]}
-            onClick={() => setshowDiscoverySelector(true)}
-            shadow
-          /> */}
         </div>
-        {/* {showDiscoverySelector && (
-          <Selector
-            items={[
-              ...DISCOVERY.map((item) => {
-                return {
-                  title: item.name,
-                  value: item.path,
-                };
-              }),
-            ]}
-            onClose={() => setshowDiscoverySelector(false)}
-            onSelection={(s) => {
-              navigate(s[0], { state: { fromHome: true } });
-            }}
-          />
-        )} */}
       </SideBarHeader>
       <SideBarBody
         onClick={(e) => {
@@ -334,7 +205,7 @@ export function SideBar(props: { className?: string }) {
         secondaryAction={
           <IconButton
             icon={<AddIcon />}
-            text={shouldNarrow ? undefined : Locale.Home.NewChat}
+            text={Locale.Home.NewChat}
             onClick={() => {
             //   if (config.dontShowMaskSplashScreen) {
             //     chatStore.newSession();
