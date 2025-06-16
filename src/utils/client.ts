@@ -1,4 +1,5 @@
-import { BuildConfig, getBuildConfig } from './build'
+import { getBuildConfig } from './build'
+import type { BuildConfig } from './build'
 
 export function getClientConfig() {
   if (typeof document !== 'undefined') {

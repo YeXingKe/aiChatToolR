@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import type { DalleQuality, DalleStyle, ModelSize } from '@/typing'
 import type { LLMModel } from '@/utils/api'
+import { getClientConfig } from '@/utils/client'
 import {
   //   DEFAULT_INPUT_TEMPLATE,
   DEFAULT_SIDEBAR_WIDTH,
@@ -31,7 +32,7 @@ export enum SubmitKey {
   AltEnter = 'Alt + Enter',
   MetaEnter = 'Meta + Enter',
 }
-
+const config = getClientConfig()
 export const DEFAULT_CONFIG = {
   lastUpdate: Date.now(), // timestamp, to merge state
 
@@ -40,7 +41,7 @@ export const DEFAULT_CONFIG = {
   fontSize: 14,
   fontFamily: '',
   // theme: Theme.Auto as Theme,
-  // tightBorder: !!config?.isApp,
+  tightBorder: !!config?.isApp,
   sendPreviewBubble: true,
   enableAutoGenerateTitle: true,
   sidebarWidth: DEFAULT_SIDEBAR_WIDTH,

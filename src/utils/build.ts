@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-require-imports */
 import pkg from '../../package.json'
 import { DEFAULT_INPUT_TEMPLATE } from './constant'

@@ -5,7 +5,9 @@ import clsx from "clsx"
 import { SideBar } from "@/components/SideBar"
 import { Chat } from "../Chat"
 import { useMobileScreen } from "@/utils"
-import { getLang } from "@/locales"
+// import { getLang } from "@/locales"
+import { getClientConfig } from "@/utils/client"
+import { useAppConfig } from "@/stores"
 
 export function WindowContent(props:{children:React.ReactNode}){
     return (
@@ -18,6 +20,7 @@ export function WindowContent(props:{children:React.ReactNode}){
 function Screen(){
     const isHome = location.pathname === RoutePath.Home
     const isMobileScreen = useMobileScreen();
+    const config = useAppConfig();
     const shouldTightBorder =
     getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
 
