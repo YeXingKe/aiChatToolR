@@ -29,7 +29,7 @@ function Screen(){
             <>
             <SideBar
                 className={clsx({
-                [styles["sidebar-show"]]: isHome,
+                [styles["sidebar-show"]]: true,
                 })}
             />
             <WindowContent>
@@ -46,9 +46,7 @@ function Screen(){
     }
     return (
         <div
-          className={clsx(styles.container, {
-            [styles["tight-container"]]: shouldTightBorder,
-          })}
+          className={clsx(styles.container)}
         >
           {renderContent()}
         </div>

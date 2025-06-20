@@ -55,8 +55,6 @@ export function SideBarContainer(props: {
       {children}
       <div
         className={styles["sidebar-drag"]}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onPointerDown={(e:any) => onDragStart(e as any)}
       >
         <DragIcon />
       </div>
@@ -175,11 +173,7 @@ export function SideBar(props: { className?: string }) {
             <div className={clsx(styles["sidebar-action"], styles.mobile)}>
               <IconButton
                 icon={<DeleteIcon />}
-                onClick={async () => {
-                //   if (await showConfirm(Locale.Home.DeleteChat)) {
-                //     chatStore.deleteSession(chatStore.currentSessionIndex);
-                //   }
-                }}
+                onClick={async () => {}}
               />
             </div>
             <div className={styles["sidebar-action"]}>
@@ -192,13 +186,6 @@ export function SideBar(props: { className?: string }) {
               </Link>
             </div>
             <div className={styles["sidebar-action"]}>
-              {/* <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-                <IconButton
-                  aria={Locale.Export.MessageFromChatGPT}
-                  icon={<GithubIcon />}
-                  shadow
-                />
-              </a> */}
             </div>
           </>
         }
@@ -206,14 +193,7 @@ export function SideBar(props: { className?: string }) {
           <IconButton
             icon={<AddIcon />}
             text={Locale.Home.NewChat}
-            onClick={() => {
-            //   if (config.dontShowMaskSplashScreen) {
-            //     chatStore.newSession();
-            //     navigate(Path.Chat);
-            //   } else {
-            //     navigate(Path.NewChat);
-            //   }
-            }}
+            onClick={() => {}}
             shadow
           />
         }
