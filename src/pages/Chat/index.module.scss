@@ -42,63 +42,7 @@
   }
 }
 
-.chat-input-actions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 5px;
 
-  &-end {
-    display: flex;
-    margin-left: auto;
-    gap: 5px;
-  }
-
-  .chat-input-action {
-    display: inline-flex;
-    border-radius: 20px;
-    font-size: 12px;
-    background-color: var(--white);
-    color: var(--black);
-    border: var(--border-in-light);
-    padding: 4px 10px;
-    animation: slide-in ease 0.3s;
-    box-shadow: var(--card-shadow);
-    transition: width ease 0.3s;
-    align-items: center;
-    height: 16px;
-    width: var(--icon-width);
-    overflow: hidden;
-
-    .text {
-      white-space: nowrap;
-      padding-left: 5px;
-      opacity: 0;
-      transform: translateX(-5px);
-      transition: all ease 0.3s;
-      pointer-events: none;
-    }
-
-    &:hover {
-      --delay: 0.5s;
-      width: var(--full-width);
-      transition-delay: var(--delay);
-
-      .text {
-        transition-delay: var(--delay);
-        opacity: 1;
-        transform: translate(0);
-      }
-    }
-
-    .text,
-    .icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-}
 
 .prompt-toast {
   position: absolute;
@@ -561,12 +505,6 @@
   flex-direction: column;
   border-top: var(--border-in-light);
   box-shadow: var(--card-shadow);
-
-  .chat-input-actions {
-    .chat-input-action {
-      margin-bottom: 10px;
-    }
-  }
 }
 
 @mixin single-line {
@@ -575,53 +513,6 @@
   text-overflow: ellipsis;
 }
 
-.prompt-hints {
-  min-height: 20px;
-  width: 100%;
-  max-height: 50vh;
-  overflow: auto;
-  display: flex;
-  flex-direction: column-reverse;
-
-  background-color: var(--white);
-  border: var(--border-in-light);
-  border-radius: 10px;
-  margin-bottom: 10px;
-  box-shadow: var(--shadow);
-
-  .prompt-hint {
-    color: var(--black);
-    padding: 6px 10px;
-    animation: slide-in ease 0.3s;
-    cursor: pointer;
-    transition: all ease 0.3s;
-    border: transparent 1px solid;
-    margin: 4px;
-    border-radius: 8px;
-
-    &:not(:last-child) {
-      margin-top: 0;
-    }
-
-    .hint-title {
-      font-size: 12px;
-      font-weight: bolder;
-
-      @include single-line();
-    }
-
-    .hint-content {
-      font-size: 12px;
-
-      @include single-line();
-    }
-
-    &-selected,
-    &:hover {
-      border-color: var(--primary);
-    }
-  }
-}
 
 .chat-input-panel-inner {
   cursor: text;
