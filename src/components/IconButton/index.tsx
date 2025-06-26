@@ -20,7 +20,8 @@ export function IconButton(props:{
     aria?: string;
 }){
     return (
-        <button className={clsx('clickable',styles['icon-button'],props.className)} title={props.title} onClick={props.onClick}>
+        <button className={clsx('clickable',styles['icon-button'],{[styles.border]:props.bordered,[styles.shadow]:props.shadow},styles[props.type ?? ""],props.className)} 
+        title={props.title} onClick={props.onClick} style={props.style} >
             {props.icon && (
                 <div className={clsx(styles['icon-button-icon'],{'no-dark':props.type === "primary"})}>{props.icon}</div>
             )}

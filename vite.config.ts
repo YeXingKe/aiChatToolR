@@ -16,8 +16,10 @@ export default defineConfig({
     }),
   ],
   resolve: {
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx', '.svg'],
     alias: {
       '@': path.resolve(__dirname, './src'), // 将 @ 映射到 src 目录
+      '.svg': '.svg?react', // 另一种方法直接在引入路径中添加?react
     },
   },
 })

@@ -55,7 +55,7 @@ export function ChatAction(props: {
   )
 }
 
-export function ChatActions(props: { showPromptModal:()=> void,showPromptHints: () => void }) {
+export function ChatActions(props: { showPromptModal:()=> void,showPromptHints: () => void,showShortcutKeyModal:() => void }) {
   return (
     <div className={styles['chat-input-actions']}>
       <ChatAction
@@ -74,7 +74,7 @@ export function ChatActions(props: { showPromptModal:()=> void,showPromptHints: 
         onClick={props.showPromptHints}
       />
       <ChatAction
-        onClick={() => {}}
+        onClick={props.showShortcutKeyModal}
         text="键盘快捷指令"
         icon={<ShortcutkeyIcon />}
       />
