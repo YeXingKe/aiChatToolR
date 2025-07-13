@@ -34,8 +34,8 @@ export function Chat(){
                     <div className={styles['chat-body']}>
                         <Fragment></Fragment>
                     </div>
-                    <div className={styles['chsetShowPromptModalat-input-panel']}>
-                        <ChatActions showShortcutKeyModal={()=>setShowShortcutKeyModal(true)} showPromptHints={() => {}} showPromptModal={() => (true)}/>
+                    <div className={styles['chat-input-panel']}>
+                        <ChatActions setShowShortcutKeyModal={setShowShortcutKeyModal} showPromptHints={() => {}} showPromptModal={() => setShowPromptModal(true)}/>
                         <label className={clsx(styles['chat-input-panel-inner'])} htmlFor="chat-input">
                             <textarea ref={inputRef} id="chat-input" className={styles['chat-input']}/>
                             <IconButton icon={<SendWhiteIcon/>} text='发送' className={styles['chat-input-send']} type="primary"/>

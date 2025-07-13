@@ -1,0 +1,112 @@
+
+.sidebar {
+    top: 0;
+    width: var(--sidebar-width);
+    box-sizing: border-box;
+    padding: 20px;
+    background-color: var(--second);
+    display: flex;
+    flex-direction: column;
+    box-shadow: inset -2px 0px 2px 0px rgb(0, 0, 0, 0.05);
+    position: relative;
+    transition: width ease 0.05s;
+  
+    .sidebar-header-bar {
+      display: flex;
+      margin-bottom: 20px;
+  
+      .sidebar-bar-button {
+        flex-grow: 1;
+  
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+    }
+  
+    &:hover,
+    &:active {
+      .sidebar-drag {
+        background-color: rgba($color: #000000, $alpha: 0.01);
+  
+        svg {
+          opacity: 0.2;
+        }
+      }
+    }
+  }
+  
+  .sidebar-drag {
+    $width: 14px;
+  
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: $width;
+    background-color: rgba($color: #000000, $alpha: 0);
+    cursor: ew-resize;
+    transition: all ease 0.3s;
+    display: flex;
+    align-items: center;
+  
+    svg {
+      opacity: 0;
+      margin-left: -2px;
+    }
+  }
+
+    
+  .sidebar-header {
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-narrow {
+      justify-content: center;
+    }
+  }
+  
+  .sidebar-logo {
+    display: inline-flex;
+  }
+  
+  .sidebar-title-container {
+    display: inline-flex;
+    flex-direction: column;
+  }
+  
+  .sidebar-title {
+    font-size: 20px;
+    font-weight: bold;
+    animation: slide-in ease 0.3s;
+  }
+  
+  .sidebar-sub-title {
+    font-size: 12px;
+    font-weight: 400;
+    animation: slide-in ease 0.3s;
+  }
+  
+  .sidebar-body {
+    flex: 1;
+    overflow: auto;
+    overflow-x: hidden;
+  }
+
+  .sidebar-tail {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+  }
+  
+  .sidebar-actions {
+    display: inline-flex;
+  }
+  
+  .sidebar-action:not(:last-child) {
+    margin-right: 15px;
+  }
+  

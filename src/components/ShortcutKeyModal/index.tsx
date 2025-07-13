@@ -6,12 +6,12 @@ import styles from './index.module.scss'
 export function ShortcutKeyModal(props:{onClose:()=>void}){
     const isMac = navigator.platform.toUpperCase().indexOf("MAC") >= 0
     const shortcuts = [
-        {title:'打开新聊天',keys:isMac?["","Shift","O"]:["Ctrl","Shift","O"]},
-        {title:'聚焦输入框',keys:isMac?["","Shift","O"]:["Ctrl","Shift","O"]},
-        {title:'复制最后一个代码块',keys:isMac?["","Shift",";"]:["Ctrl","Shift",";"]},
-        {title:'复制最后一个回复',keys:isMac?["","Shift","C"]:["Ctrl","Shift","C"]},
-        {title:'显示快捷方式',keys:isMac?["","/"]:["Ctrl","Shift","/"]},
-        {title:'清除上下文',keys:isMac?["","Shift","backspace"]:["Ctrl","Shift","backspace"]},
+        {title:'打开新聊天',keys:isMac?["⌘","Shift","O"]:["Ctrl","Shift","O"]},
+        {title:'聚焦输入框',keys:isMac?["⌘","Shift","O"]:["Ctrl","Shift","O"]},
+        {title:'复制最后一个代码块',keys:isMac?["⌘","Shift",";"]:["Ctrl","Shift",";"]},
+        {title:'复制最后一个回复',keys:isMac?["⌘","Shift","C"]:["Ctrl","Shift","C"]},
+        {title:'显示快捷方式',keys:isMac?["⌘","/"]:["Ctrl","Shift","/"]},
+        {title:'清除上下文',keys:isMac?["⌘","Shift","backspace"]:["Ctrl","Shift","backspace"]},
     ]
     
     return (

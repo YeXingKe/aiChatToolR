@@ -55,7 +55,19 @@ export function ChatAction(props: {
   )
 }
 
-export function ChatActions(props: { showPromptModal:()=> void,showPromptHints: () => void,showShortcutKeyModal:() => void }) {
+interface ChatPropsType{
+  showPromptModal:()=> void;
+  showPromptHints: () => void
+  setShowShortcutKeyModal:React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Theme = {
+  auto: "自动主题",
+  light: "亮色模式",
+  dark: "深色模式",
+}
+
+export function ChatActions(props:ChatPropsType) {
   return (
     <div className={styles['chat-input-actions']}>
       <ChatAction
@@ -74,10 +86,25 @@ export function ChatActions(props: { showPromptModal:()=> void,showPromptHints: 
         onClick={props.showPromptHints}
       />
       <ChatAction
-        onClick={props.showShortcutKeyModal}
+        onClick={() => props.setShowShortcutKeyModal(true)}
         text="键盘快捷指令"
         icon={<ShortcutkeyIcon />}
       />
+      {/* <ChatAction
+          onClick={nextTheme}
+          text={Theme[theme]}
+          icon={
+            <>
+              {theme === Theme.Auto ? (
+                <AutoIcon />
+              ) : theme === Theme.Light ? (
+                <LightIcon />
+              ) : theme === Theme.Dark ? (
+                <DarkIcon />
+              ) : null}
+            </>
+          }
+        /> */}
     </div>
   )
 }

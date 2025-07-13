@@ -1,17 +1,14 @@
 import React, { Fragment, useEffect, useMemo, useRef, useState } from "react";
 
-import styles from "@/pages/Home/index.module.scss";
+import styles from "./index.module.scss";
 
 
 import SettingsIcon from "@/assets/icons/settings.svg?react";
-import GithubIcon from "@/assets/icons/github.svg?react";
 import ChatGptIcon from "@/assets/icons/chatgpt.svg?react";
 import AddIcon from "@/assets/icons/add.svg?react";
 import DeleteIcon from "@/assets/icons/delete.svg?react";
 import MaskIcon from "@/assets/icons/mask.svg?react";
-import McpIcon from "@/assets/icons/mcp.svg?react";
 import DragIcon from "@/assets/icons/drag.svg?react";
-import DiscoveryIcon from "@/assets/icons/discovery.svg?react";
 
 
 import Locale from "@/locales";
@@ -22,8 +19,11 @@ import { IconButton } from "../IconButton";
 import { isIOS, useMobileScreen } from "@/utils";
 import { useAppConfig } from "@/stores";
 import { RoutePath } from "@/utils/constant";
+import dynamic from "next/dynamic"; // Next.js 提供的官方工具函数，用来“按需、异步”地加载 React 组件
 
-
+const ChatList = dynamic(async () => (await import("@/components/ChatList")).ChatList, {
+  loading: () => null,
+});
 
 /**
  * 边栏容器
@@ -164,8 +164,7 @@ export function SideBar(props: { className?: string }) {
           }
         }}
       >
-        {<div>聊天列表</div>}
-        {/* <ChatList narrow={shouldNarrow} /> */}
+        <ChatList />
       </SideBarBody>
       <SideBarTail
         primaryAction={
